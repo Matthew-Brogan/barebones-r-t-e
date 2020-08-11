@@ -4,6 +4,7 @@ import * as cors from 'cors';
 import sendGrid from '@sendgrid/mail';
 const app = express();
 const router = express.Router();
+import * as path from 'path';
 
 
 app.use(bodyParser.json());
@@ -20,7 +21,7 @@ router.get('/api', (req,res,next) => {
     res.send('API Status: Running')
 });
 
-router.post('/api/email',(req,res,next) =>{ sendGrid.setApiKey('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');
+router.post('.api/email',(req,res,next) =>{ sendGrid.setApiKey('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');
   const msg = {
       to: 'broganmatt11@gmail.com',
       from: req.body.email,
@@ -40,5 +41,11 @@ router.post('/api/email',(req,res,next) =>{ sendGrid.setApiKey('SG.sRyfMxMvQ_et5
       })
 
 });
+
+app.get("*", (req,res,next) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+});
+
+//app.use((err ,req,next))
 
 app.listen(3000, '0.0.0.0')

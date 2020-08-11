@@ -11,7 +11,7 @@ import Footer from './Components/footer';
 
 class App extends React.Component<IAppProps, IAppState> {
   
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       title: 'Matthew Brogan',

@@ -19,18 +19,13 @@ class ContactPage extends React.Component<IContactPageProps,IContactPageState> {
 
     }
 
-    //  handleChange = (event) => {
-    //      console.log(event);
+      handleChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
 
-    //      const target= event.target;
-    //     const value = target.type === 'checkbox' ? target.checked : target.value;
-    //      const name = target.name;
+        this.setState({
+           name: event.target.value
+         })
 
-    //    this.setState({
-    //        [name]: value
-    //      })
-
-    // }
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -39,7 +34,7 @@ class ContactPage extends React.Component<IContactPageProps,IContactPageState> {
             disabled:true
         });
 
-        Axios.post('http://codewithmatt.herokuapp.com/api/email',this.state)
+        Axios.post('http://localhost:3000/api/email',this.state)
             .then(res => {
                 if(res.data.success){
                     this.setState({
@@ -78,17 +73,17 @@ class ContactPage extends React.Component<IContactPageProps,IContactPageState> {
                <Form onSubmit={this.handleSubmit}>
                    <Form.Group>
                        <Form.Label htmlFor="fullName">Full Name</Form.Label>
-                       <Form.Control id="full-name" name="name" type="text" value={this.state.name}  />
+                       <Form.Control id="full-name" name="name" type="text" value={this.state.name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> this.setState({name: e.target.value})} />
                    </Form.Group>
 
                    <Form.Group>
                        <Form.Label htmlFor="email">Email</Form.Label>
-                       <Form.Control id="email" name="email" type="email" value={this.state.email}  />
+                       <Form.Control id="email" name="email" type="email" value={this.state.email} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>this.setState({email: e.target.value})}  />
                    </Form.Group>
 
                    <Form.Group>
                        <Form.Label htmlFor="message">Message</Form.Label>
-                       <Form.Control id="message" name="message" as="textarea" rows={3} value={this.state.message}  />
+                       <Form.Control id="message" name="message" as="textarea" rows={3} value={this.state.message} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> this.setState({message: e.target.value})}  />
                    </Form.Group>
 
 
